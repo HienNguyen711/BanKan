@@ -37,25 +37,57 @@ let TaskActionCreators = {
 
 
 
-        //editTask
+        deleteTask(cardId, task, taskIndex) {
+            return (dispatch) => {
+                dispatch({
+                    type: REQUEST_DELETE_TASK,
+                    cardId,
+                    taskIndex
+                });
+                KanbanAPI.deleteTask(cardId, task).then(
+                    () => dispatch({
+                        type: RECEIVE_DELETE_TASK,
+                        success: true,
+                        cardId,
+                        task,
+                        taskIndex
+                    }), (error) => dispatch({
+                        type: RECEIVE_DELETE_TASK,
+                        success: false,
+                        cardId,
+                        task,
+                        taskIndex,
+                        error
+                    })
+                )
+            };
+        },
 
+        toggleTask(cardId, task, taskIndex) {
+            return (dispatch) => {
+                dispatch({
+                    type: REQUEST_TOGGLE_TASK,
+                    cardId,
+                    taskIndex
+                });
+                KanbanAPI.toggleTask(cardId, task).then(
+                    () => dispatch({
+                        type: RECEIVE_TOGGLE_TASK,
+                        success: true,
+                        cardId,
+                        task,
+                        taskIndex
+                    }), (error) => dispatch({
+                        type: RECEIVE_TOGGLE_TASK,
+                        success: false,
+                        cardId,
+                        taskIndex,
+                        error
+                    })
+                )
+            };
+        }
 
+};
 
-
-
-        //deleteTask
-
-
-
-
-        //dragndrop task
-
-
-
-        //toggletask
-
-
-
-
-
-}
+export default TaskActionCreators;
