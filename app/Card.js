@@ -4,6 +4,7 @@ import marked from 'marked';
 import { DragSource, DropTarget } from 'react-dnd';
 import constants from './constants';
 import CheckList from './CheckList';
+import {Link} from 'react-router';
 //validate titlePropName
 let titlePropType = (props, propName, componentName) => {
   if (props[propName]) {
@@ -95,6 +96,7 @@ class Card extends Component {
     return connectDropTarget(connectDragSource(
       <div className="card">
         <div style={sideColor}>
+        <div className="card__edit"><Link to={'/edit/'+this.props.id}>✎</Link></div>
         <div className={
             this.state.showDetails? "card__title card__title--is-open" : "card__title"
           } onClick={this.toggleDetails.bind(this)}>
