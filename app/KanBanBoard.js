@@ -19,4 +19,12 @@ class KanbanBoard extends Component {
   }
 };
 
+
+
+//set PropTypes 
+KanbanBoard.propTypes = {
+    cards:PropTypes.arrayOf(PropTypes.object),
+    taskCallbacks:PropTypes.object
+};
+
 export default KanbanBoard;
