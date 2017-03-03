@@ -85,16 +85,45 @@ class KanBanBoardContainer extends Component {
         })
             .catch((err) => {
             this.setState(prevState);
-        })
-        
-        
-        
-        
-        
-        
+        });
         
         
     }
+    
+    //delete task 
+    
+    deleteTask(cardId, taskId, taskIndex){
+        let prevState = this.state;
+        let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+    // Create a new object without the task
+    let nextState = update(this.state.cards, {
+      [cardIndex]: {
+        tasks: {$splice: [[taskIndex,1]] }
+      }
+    });
+    // set the component state to the mutated object
+    this.setState({cards:nextState});
+    // Call the API to remove the task on the server
+    fetch(`${API_URL}/cards/${cardId}/tasks/${taskId}`, {
+      method: 'delete',
+      headers: API_HEADERS
+    })
+    .then((response) => {
+      if(!response.ok){
+        
+        throw new Error("Server response wasn't OK")
+      }
+    })
+    .catch((error) => {
+      console.error("Fetch error:",error)
+      this.setState(prevState);
+    });
+  }
+    
+    
+    
+    
+    
     
     
     
