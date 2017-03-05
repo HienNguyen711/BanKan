@@ -32,39 +32,96 @@ let CardActionCreators = {
     
     
     //toggleCarddetails
-    
+    toggleCarddetails(cardId) {
+      return {
+        type:TOGGLE_CARD_DETAILS,
+        cardId
+      };
+    },
     
     
     //addcard
-    
+    addCard(card) {
+      return (dispatch) => {
+        dispatch({
+          type: REQUEST_CREATE_CARD,
+          card
+        });
+        KanbanAPI.addCard(card)
+          .then((receivedNewCard) => dispatch({
+            type:RECEIVE_CREATE_CARD,success:true, card: receivedNewCard }),
+        (error) => dispatch({ type: RECEIVE_CREATE_CARD, success:false, card, error })
+      );
+    };
+  },
     
     
     
     //updatecard
-    
+    updateCard(card, cardDraft) {
+    return (dispatch) => {
+      dispatch({ type: REQUEST_UPDATE_CARD, card:cardDraft });
+      KanbanAPI.updateCard(card, cardDraft).then(
+        (receivedUpdatedCard) => dispatch({ type: RECEIVE_UPDATE_CARD, success:true, card:receivedUpdatedCard }),
+        (error) => dispatch({ type: RECEIVE_UPDATE_CARD, success:false, card, error })
+      )
+    };
+  },
     
     
     
     //updatecardstatus
-    
-    
+    _updateCardStatus: throttle((dispatch, cardId, listId) => {
+    dispatch({ type: UPDATE_CARD_STATUS, cardId, listId });
+  }),
+
+
+    updateCardStatus(cardId, listId) {
+      return (dispatch) => this._updateCardStatus(dispatch, cardId, listId);
+    },
     
     
     //updatecardposition
     
     
-    
+    _updateCardPosition: throttle((dispatch, cardId, afterId) => {
+    dispatch({ type: UPDATE_CARD_POSITION, cardId, afterId });
+  }, 500),
+
+  updateCardPosition(cardId, afterId) {
+    return (dispatch) => this._updateCardPosition(dispatch, cardId, afterId);
+  },
     
     
     
     //persistcarddrag
-    
-    
-    
-    
-    
-    
-    
-    
-    
-}
+     persistCardDrag(cardProps) {
+    return (dispatch, getState) => {
+      const state = getState();
+      const card = getCard(state, cardProps.id);
+      const cardIndex = getCardIndex(state, cardProps.id);
+      dispatch({ type: REQUEST_PERSIST_CARD_DRAG });
+      KanbanAPI.persistCardDrag(card.id, card.status, cardIndex).then(
+        () => dispatch({ type: RECEIVE_PERSIST_CARD_DRAG, success:true, cardProps }),
+        (error) => dispatch({ type: RECEIVE_PERSIST_CARD_DRAG, success:false, cardProps, error })
+      );
+    }
+  },
+
+
+
+   toggleCardDetails(cardId) {
+    return { type: TOGGLE_CARD_DETAILS, cardId };
+  },
+
+  createDraft(card) {
+    return { type: CREATE_DRAFT, card };
+  },
+
+  updateDraft(field, value) {
+    return { type: UPDATE_DRAFT, field, value };
+  }
+
+};
+
+export default CardActionCreators;
