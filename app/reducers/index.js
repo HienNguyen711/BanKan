@@ -1,3 +1,4 @@
+/*rootReducer*/
 import { combineReducers } from 'redux';
 import cards, * as fromCards from './cards';
 import cardDraft from './cardDraft';

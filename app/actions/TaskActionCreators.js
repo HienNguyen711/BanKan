@@ -10,6 +10,7 @@ from '../constants';
 import KanbanAPI from '../api/KanbanApi';
 
 let TaskActionCreators = {
+    //addTask action
     addTask(cardId, task) {
             return (dispatch) => {
                 dispatch({
@@ -35,7 +36,7 @@ let TaskActionCreators = {
             };
         },
 
-
+        //delete task action
 
         deleteTask(cardId, task, taskIndex) {
             return (dispatch) => {
@@ -62,6 +63,8 @@ let TaskActionCreators = {
                 )
             };
         },
+
+        //toggleTask action
 
         toggleTask(cardId, task, taskIndex) {
             return (dispatch) => {
