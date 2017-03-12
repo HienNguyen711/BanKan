@@ -13,4 +13,4 @@ let contacts = [
 
 
 //...render ....
-render(<ContactsApp contacts={contacts} />,document.getElementById('root'));
+render(<ContactsAppContainer contacts={contacts} />,document.getElementById('root'));
