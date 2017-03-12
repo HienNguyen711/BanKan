@@ -1,9 +1,28 @@
 //import
 class ContactsApp extends Component {
+
+  constructor() {
+    super();//no props here because we dont get any props from any higher component
+    this.setState = {
+
+      filterText: ''
+    };
+  }
+
+  handleUserInput(searchTerm) {
+    this.setState({
+      filterText:searchTerm
+      //immutable needs to take notice here??
+    })
+  }
+
+
+
+
   render() {
     <div>
-      <SearchBar />
-      <ContactList contact={this.state.props.contacts}/>
+      <SearchBar filterText={this.state.filterText} onUserInput={this.handleUserInput.bind(this)}/>
+      <ContactList contact={this.state.props.contacts} filterText={this.state.filterText}/>
 
 
     </div>
