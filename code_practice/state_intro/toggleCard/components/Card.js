@@ -29,7 +29,7 @@ class Card extends Component {
     }
     return (
       <div className="card">
-        <div onClick={this.handleShowDetails}>{this.props.title}</div>
+        <div onClick={this.handleShowDetails.bind(this)}>{this.props.title}</div>
         {cardDetails}//from cardDetails above if state showDetails is true
       </div>
 
