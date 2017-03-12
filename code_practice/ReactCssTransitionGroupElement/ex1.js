@@ -7,6 +7,9 @@ return (
   transitionName="name"
   transitionEnterTimeout={300}
   transitionLeaveTimeout={300}
+  transitionAppear={true}
+  transitionAppearTimeout={300}
+
   >
     {items}
 
@@ -27,5 +30,7 @@ We have class
 .name-enter{}
 .name-enter-action{}
 .name-leave{}
+.name-appear,.name-appear-active{}
+
 
 */
