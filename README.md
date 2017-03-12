@@ -9,21 +9,8 @@ This is the KanBan app that I learn to create while reading the book Pro React. 
 + Probably improve the stysheets using PostCSS, BEM
 ## How to install
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Want to know more about the book?
+I have created a foler in this repo called `code_practice`. In there, there are bunch of pieces of code examples from the book and I gave comments as well as explanation of the code 
 
 
 
