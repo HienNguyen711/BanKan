@@ -55,3 +55,4 @@ class ShoppingCard extends Component {
 }
 //shopping card propTypes
 
+export default DropTarget('snack',shoppingcartSpects,collect)(ShoppingCard);
